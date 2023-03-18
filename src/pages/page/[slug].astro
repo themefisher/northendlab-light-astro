@@ -1,0 +1,75 @@
+---
+import { Image } from "@astrojs/image/components";
+import config from "@config/config.json";
+import Base from "@layouts/Base.astro";
+import Pagination from "@layouts/components/Pagination.astro";
+import Post from "@layouts/partials/Post.astro";
+import { getSinglePage } from "@lib/contentParser.astro";
+import { sortByDate } from "@lib/utils/sortFunctions";
+import { markdownify } from "@lib/utils/textConverter";
+import { getEntryBySlug } from "astro:content";
+import Cta from "@layouts/components/Cta.astro";
+
+const homepage = await getEntryBySlug("homepage", "index");
+
+export async function getStaticPaths() {
+  const posts = await getSinglePage(config.settings.blog_folder);
+  const totalPages = Math.ceil(posts.length / config.settings.pagination);
+  const paths = [];
+
+  for (let i = 1; i < totalPages; i++) {
+    paths.push({
+      params: {
+        slug: (i + 1).toString(),
+      },
+    });
+  }
+  return paths;
+}
+const {banner, call_to_action} = homepage.data;
+const { slug } = Astro.params;
+const posts = await getSinglePage(config.settings.blog_folder);
+const sortedPosts = sortByDate(posts);
+const totalPages = Math.ceil(posts.length / config.settings.pagination);
+const currentPage = slug && !isNaN(Number(slug)) ? Number(slug) : 1;
+const indexOfLastPost = currentPage * config.settings.pagination;
+const indexOfFirstPost = indexOfLastPost - config.settings.pagination;
+const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
+---
+
+<Base>
+   <!-- Banner -->
+   <section class="banner" style="background-image: url('/images/banner/banner-bg.svg'">
+    <div class="container">
+        {banner?.image && 
+          <Image class="banner-illustration" src={banner?.image} width={768} height={385} alt="" />
+        }
+      <div class="row">
+        <div class="lg:col-6">
+          {banner?.title && <h1 set:html={markdownify(banner?.title)} class="h2 mb-8" />}
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ./End Banner -->
+
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="lg:col-8 mx-auto px-0">
+            <div class="shadow p-[60px] rounded-xl">
+              {currentPosts.map((post, i) => (
+                  <Post post={post} />
+                ))}
+              <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+              />
+            </div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <Cta cta={call_to_action} />
+</Base>

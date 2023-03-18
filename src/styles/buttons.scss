@@ -1,0 +1,11 @@
+.btn {
+  @apply inline-block border px-5 py-2 font-semibold transition;
+}
+
+.btn-primary {
+  @apply bg-primary text-white rounded-md leading-[30px] font-normal h-[50px] capitalize;
+}
+
+.btn-outline-primary {
+  @apply border-primary bg-transparent hover:bg-primary hover:text-white;
+}

@@ -1,0 +1,70 @@
+---
+import { Image } from "@astrojs/image/components";
+import config from "@config/config.json";
+import { getSinglePage } from "@lib/contentParser.astro";
+import dateFormat from "@lib/utils/dateFormat";
+import { humanize, plainify, slugify } from "@lib/utils/textConverter";
+const authors = await getSinglePage("authors");
+const { summary_length } = config.settings;
+const { post } = Astro.props;
+---
+
+<div class="card pb-[30px] border-border border-b mb-12">
+  <!-- {
+    post.data.image && (
+      <Image
+        class="rounded-lg"
+        src={post.data.image}
+        alt={post.data.title}
+        width={445}
+        height={230}
+      />
+    )
+  } -->
+  
+  <h3 class="h4">
+    <a href={`/posts/${post.slug}`} class="block text-primary hover:underline font-normal">
+      {post.data.title}
+    </a>
+  </h3>
+  <ul class="mb-4 mt-1.5 flex flex-wrap items-center space-x-3 text-light">
+    <li>
+      {
+        authors
+          .filter((author) =>
+            post.data.authors
+              .map((author: string) => slugify(author))
+              .includes(slugify(author.data.title))
+          )
+          .map((author) => (
+            <a
+              href={`/authors/${slugify(author.data.title)}`}
+              class="flex items-center hover:text-primary hover:underline">
+                <span>{author.data.title}</span>
+            </a>
+          ))
+      }
+    </li>
+    <li>{dateFormat(post.data.date)}</li>
+    <li>
+      <ul>
+        {
+          post.data.categories.map((category: string) => (
+            <li class="inline-block">
+              <a
+                href={`/categories/${slugify(category)}`}
+                class="mr-3 hover:text-primary hover:underline"
+              >
+               {humanize(category)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </li>
+  </ul>
+  <p class="text-text text-lg">
+    {plainify(post.body?.slice(0, Number(summary_length)))}
+  </p>
+  <a class="mt-3 text-[15px] leading-[22px] py-1 border-b border-primary text-primary inline-block" href={`/posts/${post.slug}`}>Read More</a>
+</div>

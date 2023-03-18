@@ -1,0 +1,67 @@
+---
+import { Image } from "@astrojs/image/components";
+import config from "@config/config.json";
+import Base from "@layouts/Base.astro";
+import Pagination from "@layouts/components/Pagination.astro";
+import Post from "@layouts/partials/Post.astro";
+import { getSinglePage } from "@lib/contentParser.astro";
+import { getTaxonomy } from "@lib/taxonomyParser.astro";
+import taxonomyFilter from "@lib/utils/taxonomyFilter";
+import { markdownify } from "@lib/utils/textConverter";
+import { getEntryBySlug } from "astro:content";
+const { blog_folder, pagination } = config.settings;
+
+export async function getStaticPaths() {
+  const { blog_folder,  } = config.settings;
+  const categories = await getTaxonomy(blog_folder, "categories");
+
+  return categories.map((category) => {
+    return {
+      params: { category },
+    };
+  });
+}
+
+const { category } = Astro.params;
+const homepage = await getEntryBySlug("homepage", "index");
+const {banner} = homepage.data;
+const posts = await getSinglePage(blog_folder);
+const filterByTags = taxonomyFilter(posts, "categories", category);
+const totalPages = Math.ceil(posts.length / pagination);
+---
+
+<Base title={category}>
+   <!-- Banner -->
+   <section class="banner" style="background-image: url('/images/banner/banner-bg.svg'">
+    <div class="container">
+      <div class="row">
+        <div class="lg:col-6">
+          {banner?.title && <h1 set:html={markdownify(banner?.title)} class="h2 mb-8" />}
+        </div>
+      </div>
+      <div class="banner-illustration">
+        {banner?.image && 
+          <Image src={banner?.image} width={768} height={385} alt="" />
+        }
+      </div>
+    </div>
+  </section>
+  <!-- ./End Banner -->
+
+  <div class="section">
+    <div class="container">
+      
+      <div class="row px-3">
+        <div class="lg:col-8 mx-auto px-0">
+          <h1 class="h2 mb-8">
+            Posts related to <span class="text-primary">{category}</span> category
+          </h1>
+          <div class="shadow py-12 px-9 md:p-[60px] rounded">
+            {filterByTags.slice(0, pagination).map((post) => (<Post post={post} />))}
+            <Pagination currentPage={1} totalPages={totalPages} />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>

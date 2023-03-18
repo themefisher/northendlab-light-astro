@@ -1,0 +1,79 @@
+---
+import { Image } from "@astrojs/image/components";
+import { getSinglePage } from "@lib/contentParser.astro";
+import dateFormat from "@lib/utils/dateFormat";
+import { humanize, markdownify, slugify } from "@lib/utils/textConverter";
+
+const allAuthors = await getSinglePage("authors");
+const { post } = Astro.props;
+const { Content } = await post.render();
+const { title, authors, categories, image, date, tags } = post.data;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="row px-3">
+      <div class="mx-auto lg:col-8">
+        <div class="rounded-xl py-12 px-9 shadow md:p-[60px]">
+          <article>
+            <h1 set:html={markdownify(title)} class="h2" />
+            <ul
+              class="mt-4 mb-8 flex flex-wrap items-center space-x-3 text-text"
+            >
+              <li>
+                {
+                  allAuthors
+                    .filter((author) =>
+                      authors
+                        .map((author: string) => slugify(author))
+                        .includes(slugify(author.data.title))
+                    )
+                    .map((author, i) => (
+                      <a
+                        href={`/authors/${slugify(author.slug)}`}
+                        class="flex items-center hover:text-primary hover:underline"
+                      >
+                        <span>{author.data.title}</span>
+                      </a>
+                    ))
+                }
+              </li>
+              <li>{dateFormat(date)}</li>
+              <li>
+                <ul>
+                  {
+                    categories.map((category: string) => (
+                      <li class="inline-block">
+                        <a
+                          href={`/categories/${slugify(category)}`}
+                          class="mr-3 hover:text-primary hover:underline"
+                        >
+                          {humanize(category)}
+                        </a>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </li>
+            </ul>
+            {
+              image && (
+                <Image
+                  src={image}
+                  height={500}
+                  width={1000}
+                  alt={title}
+                  class="rounded-lg"
+                />
+              )
+            }
+            <div class="content mb-16 text-left">
+              <Content />
+              <!-- <Markdown content={post.body} components={shortcodes} /> -->
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

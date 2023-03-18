@@ -1,0 +1,79 @@
+---
+import { Image } from "@astrojs/image/components";
+import config from "@config/config.json";
+import Base from "@layouts/Base.astro";
+import { markdownify } from "@lib/utils/textConverter";
+import { getEntryBySlug } from "astro:content";
+
+const entry = await getEntryBySlug("contact", "index");
+const { contact_form_action } = config.params;
+const { title, image, content } = entry.data;
+---
+
+<Base title={title} image={image}>
+  <section class="section pb-0">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="lg:col-5">
+          {title && <h1 set:html={markdownify(title)} class="h2 mb-8" />}
+          {content && <p class="text-lg" set:html={markdownify(content)} />}
+          <form
+            class="contact-form mt-6"
+            method="POST"
+            action={contact_form_action}
+          >
+            <div class="row">
+              <div class="mb-4 lg:col-6">
+                <input
+                  class="form-input w-full"
+                  name="name"
+                  placeholder="Name"
+                  type="text"
+                  required
+                />
+              </div>
+              <div class="mb-4 lg:col-6">
+                <input
+                  class="form-input w-full"
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+            </div>
+            <div class="mb-4">
+              <input
+                class="form-input w-full"
+                name="subject"
+                type="text"
+                placeholder="Subject"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <textarea
+                class="form-textarea w-full"
+                placeholder="Type Your Message Here"
+                rows="7"></textarea>
+            </div>
+            <button class="btn btn-primary block w-full">Submit Now</button>
+          </form>
+        </div>
+        <div class="mt-6 lg:col-6 lg:mt-0">
+          {
+            image && (
+              <Image
+                class="w-full"
+                src={image}
+                width={540}
+                height={515}
+                alt=""
+              />
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

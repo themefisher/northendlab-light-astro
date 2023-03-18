@@ -1,0 +1,48 @@
+---
+import { Image } from "@astrojs/image/components";
+import { getSinglePage } from "@lib/contentParser.astro";
+import { markdownify } from "@lib/utils/textConverter";
+import Post from "./partials/Post.astro";
+
+const { author } = Astro.props;
+const { title, image } = author.data;
+const { Content } = await author.render();
+const posts = await getSinglePage('posts');
+const filterByAuthor = posts.filter(post => post.data.authors.includes(title));
+---
+
+<section class="section">
+  <div class="container">
+    <div class="row justify-center">
+      <div class="lg:col-8">
+        <div class="shadow py-12 px-9 md:p-[60px] rounded text-center">
+          {
+            image && (
+              <div class="mb-8">
+                <Image
+                  src={image}
+                  class="mx-auto rounded-full"
+                  height={300}
+                  width={300}
+                  alt={title}
+                />
+              </div>
+            )
+          }
+          <h1 set:html={markdownify(title)} class="h2 mb-8" />
+          <div class="content">
+            <Content />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-center mt-16">
+      <div class="lg:col-8">
+        <h2 class="mb-4">Posts by {title}</h2>
+        <div class="shadow py-12 px-9 md:p-[60px] rounded">
+          {filterByAuthor.map((post) => (<Post post={post} />))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

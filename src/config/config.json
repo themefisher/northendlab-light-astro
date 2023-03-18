@@ -1,0 +1,30 @@
+{
+  "site": {
+    "title": "Northendlab | Astro Blog Theme",
+    "base_url": "https://example.com",
+    "base_path": "/",
+    "trailing_slash": false,
+    "favicon": "/images/favicon.png",
+    "logo": "/images/logo.svg",
+    "logo_width": "197",
+    "logo_height": "31",
+    "logo_text": "Northendlab"
+  },
+
+  "settings": {
+    "blog_folder": "posts",
+    "pagination": 5,
+    "summary_length": 140
+  },
+
+  "params": {
+    "contact_form_action": "#",
+    "copyright": "© 2023 [Themefisher](https://themefisher.com/) All Rights Reserved"
+  },
+
+  "metadata": {
+    "meta_author": "Themefisher",
+    "meta_image": "/images/og-image.png",
+    "meta_description": "Northendlab Light Astro Blog Theme"
+  }
+}

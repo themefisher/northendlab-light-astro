@@ -1,5 +1,5 @@
 <h1 align=center>Northendlab Light Astro</h1>
-<p align=center>Northendlab is a highly customizable Astro theme designed specifically personal blog.  
+<p align=center>Northendlab is a beautifully designed & highly customizable Astro theme created specifically for personal blog websites. Users can customize the color scheme, fonts, menu, social links, etc. and update the content easily based on their requirements.  
 </p>
 <h2 align="center"> <a target="_blank" href="https://northendlab-light-astro.vercel.app/" rel="nofollow">Demo</a> | <a  target="_blank" href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fnorthendlab-light-astro.vercel.app%2F&form_factor=desktop">Page Speed (100%)</a>
 </h2>
@@ -20,7 +20,7 @@
 
 ![northendlab-light](https://demo.gethugothemes.com/thumbnails/northendlab-light.png)
 
-Northendlab is a beautifully designed & highly customizable Astro theme created specifically for personal blog websites. Users can customize the color scheme, fonts, menu, social links, etc. and update the content easily based on their requirements.
+
 
 ## Key Features
 
@@ -28,7 +28,6 @@ Northendlab is a beautifully designed & highly customizable Astro theme created 
 - Fast by default (95+ Google PageSpeed Score)
 - Netlify setting pre-configured
 - Contact form support
-- Pricing table
 - Support OG image
 - Write and update content in Markdown / MDX
 - MDX components auto import

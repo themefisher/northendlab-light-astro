@@ -7,15 +7,17 @@ import Post from "./partials/Post.astro";
 const { author } = Astro.props;
 const { title, image } = author.data;
 const { Content } = await author.render();
-const posts = await getSinglePage('posts');
-const filterByAuthor = posts.filter(post => post.data.authors.includes(title));
+const posts = await getSinglePage("posts");
+const filterByAuthor = posts.filter((post) =>
+  post.data.authors.includes(title)
+);
 ---
 
 <section class="section">
   <div class="container">
     <div class="row justify-center">
       <div class="lg:col-8">
-        <div class="shadow py-12 px-9 md:p-[60px] rounded text-center">
+        <div class="rounded py-12 px-9 text-center shadow md:p-[60px]">
           {
             image && (
               <div class="mb-8">
@@ -36,11 +38,11 @@ const filterByAuthor = posts.filter(post => post.data.authors.includes(title));
         </div>
       </div>
     </div>
-    <div class="row justify-center mt-16">
+    <div class="row mt-16 justify-center">
       <div class="lg:col-8">
         <h2 class="mb-4">Posts by {title}</h2>
-        <div class="shadow py-12 px-9 md:p-[60px] rounded">
-          {filterByAuthor.map((post) => (<Post post={post} />))}
+        <div class="rounded py-12 px-9 shadow md:p-[60px]">
+          {filterByAuthor.map((post) => <Post post={post} />)}
         </div>
       </div>
     </div>

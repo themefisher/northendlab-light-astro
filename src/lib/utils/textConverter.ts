@@ -1,4 +1,4 @@
-import githubSlugger from 'github-slugger';
+import githubSlugger from "github-slugger";
 import { marked } from "marked";
 const { slug } = githubSlugger;
 

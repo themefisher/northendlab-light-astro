@@ -3,17 +3,19 @@ import { defineCollection, z } from "astro:content";
 // Homepage schema
 const homepage = defineCollection({
   schema: z.object({
-    banner: z.object({
-      title: z.string().optional(),
-      image: z.string().optional()
-    }).optional(),
+    banner: z
+      .object({
+        title: z.string().optional(),
+        image: z.string().optional(),
+      })
+      .optional(),
     call_to_action: z.object({
       title: z.string().optional(),
       content: z.string().optional(),
       image: z.string().optional(),
       button_label: z.string().optional(),
-      button_link: z.string().optional()
-    })
+      button_link: z.string().optional(),
+    }),
   }),
 });
 
@@ -62,9 +64,9 @@ const contact = defineCollection({
     title: z.string().optional(),
     content: z.string().optional(),
     image: z.string().optional(),
-    draft: z.boolean().optional()
-  })
-})
+    draft: z.boolean().optional(),
+  }),
+});
 
 // Export collections
 export const collections = {
@@ -72,5 +74,5 @@ export const collections = {
   posts: postsCollection,
   pages: pagesCollection,
   authors: authorsCollection,
-  contact: contact
+  contact: contact,
 };

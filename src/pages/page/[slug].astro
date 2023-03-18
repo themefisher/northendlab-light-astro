@@ -26,7 +26,7 @@ export async function getStaticPaths() {
   }
   return paths;
 }
-const {banner, call_to_action} = homepage.data;
+const { banner, call_to_action } = homepage.data;
 const { slug } = Astro.params;
 const posts = await getSinglePage(config.settings.blog_folder);
 const sortedPosts = sortByDate(posts);
@@ -38,15 +38,30 @@ const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
 ---
 
 <Base>
-   <!-- Banner -->
-   <section class="banner" style="background-image: url('/images/banner/banner-bg.svg'">
+  <!-- Banner -->
+  <section
+    class="banner"
+    style="background-image: url('/images/banner/banner-bg.svg'"
+  >
     <div class="container">
-        {banner?.image && 
-          <Image class="banner-illustration" src={banner?.image} width={768} height={385} alt="" />
-        }
+      {
+        banner?.image && (
+          <Image
+            class="banner-illustration"
+            src={banner?.image}
+            width={768}
+            height={385}
+            alt=""
+          />
+        )
+      }
       <div class="row">
         <div class="lg:col-6">
-          {banner?.title && <h1 set:html={markdownify(banner?.title)} class="h2 mb-8" />}
+          {
+            banner?.title && (
+              <h1 set:html={markdownify(banner?.title)} class="h2 mb-8" />
+            )
+          }
         </div>
       </div>
     </div>
@@ -56,17 +71,12 @@ const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
   <section class="section">
     <div class="container">
       <div class="row">
-        <div class="lg:col-8 mx-auto px-0">
-            <div class="shadow p-[60px] rounded-xl">
-              {currentPosts.map((post, i) => (
-                  <Post post={post} />
-                ))}
-              <Pagination
-                totalPages={totalPages}
-                currentPage={currentPage}
-              />
-            </div>
+        <div class="mx-auto px-0 lg:col-8">
+          <div class="rounded-xl p-[60px] shadow">
+            {currentPosts.map((post, i) => <Post post={post} />)}
+            <Pagination totalPages={totalPages} currentPage={currentPage} />
           </div>
+        </div>
       </div>
     </div>
   </section>

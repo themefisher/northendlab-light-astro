@@ -77,40 +77,51 @@ export default function SearchBar({ searchList }: Props) {
         ref={inputRef}
       />
 
-     
-
       <div className="row">
-        <div className="lg:col-8 mx-auto px-0">
-            {inputVal.length > 1 && (
-              <h2 className="mt-8 font-normal">
-                Found {searchResults?.length}
-                {searchResults?.length && searchResults?.length === 1
-                  ? " result"
-                  : " results"}{" "}
-                for <span className="text-primary">{inputVal}</span>
-              </h2>
-            )}
-            {searchResults?.length ? 
-              <div className="shadow py-12 px-9 md:p-[60px] rounded">
-                {searchResults?.map(({ item }) => (
-                  <div className="card pb-[30px] border-border border-b mb-12" key={item.slug}>
-                    <h3 className="h4">
-                      <a href={`/posts/${item.slug}`} className="block text-primary hover:underline font-normal">
-                        {item.data.title}
-                      </a>
-                    </h3>
-                    <p className="text-text text-lg mt-2.5">
-                      {plainify(item.content?.slice(0, Number(summary_length)))}
-                    </p>
-                    <p className="mt-3 text-lg">Categories: {item.data.categories?.map((category:string, index:number) => <a key={index} href="#">{category}</a>)}</p>
+        <div className="mx-auto px-0 lg:col-8">
+          {inputVal.length > 1 && (
+            <h2 className="mt-8 font-normal">
+              Found {searchResults?.length}
+              {searchResults?.length && searchResults?.length === 1
+                ? " result"
+                : " results"}{" "}
+              for <span className="text-primary">{inputVal}</span>
+            </h2>
+          )}
+          {searchResults?.length ? (
+            <div className="rounded py-12 px-9 shadow md:p-[60px]">
+              {searchResults?.map(({ item }) => (
+                <div
+                  className="card mb-12 border-b border-border pb-[30px]"
+                  key={item.slug}
+                >
+                  <h3 className="h4">
+                    <a
+                      href={`/posts/${item.slug}`}
+                      className="block font-normal text-primary hover:underline"
+                    >
+                      {item.data.title}
+                    </a>
+                  </h3>
+                  <p className="mt-2.5 text-lg text-text">
+                    {plainify(item.content?.slice(0, Number(summary_length)))}
+                  </p>
+                  <p className="mt-3 text-lg">
+                    Categories:{" "}
+                    {item.data.categories?.map(
+                      (category: string, index: number) => (
+                        <a key={index} href="#">
+                          {category}
+                        </a>
+                      )
+                    )}
+                  </p>
                 </div>
-                ))}
+              ))}
             </div>
-            : null
-          }
-            
-          </div>
+          ) : null}
         </div>
+      </div>
     </div>
   );
 }

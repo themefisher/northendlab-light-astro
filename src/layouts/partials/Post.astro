@@ -9,7 +9,7 @@ const { summary_length } = config.settings;
 const { post } = Astro.props;
 ---
 
-<div class="card pb-[30px] border-border border-b mb-12">
+<div class="card mb-12 border-b border-border pb-[30px]">
   <!-- {
     post.data.image && (
       <Image
@@ -21,9 +21,12 @@ const { post } = Astro.props;
       />
     )
   } -->
-  
+
   <h3 class="h4">
-    <a href={`/posts/${post.slug}`} class="block text-primary hover:underline font-normal">
+    <a
+      href={`/posts/${post.slug}`}
+      class="block font-normal text-primary hover:underline"
+    >
       {post.data.title}
     </a>
   </h3>
@@ -39,8 +42,9 @@ const { post } = Astro.props;
           .map((author) => (
             <a
               href={`/authors/${slugify(author.data.title)}`}
-              class="flex items-center hover:text-primary hover:underline">
-                <span>{author.data.title}</span>
+              class="flex items-center hover:text-primary hover:underline"
+            >
+              <span>{author.data.title}</span>
             </a>
           ))
       }
@@ -55,7 +59,7 @@ const { post } = Astro.props;
                 href={`/categories/${slugify(category)}`}
                 class="mr-3 hover:text-primary hover:underline"
               >
-               {humanize(category)}
+                {humanize(category)}
               </a>
             </li>
           ))
@@ -63,8 +67,11 @@ const { post } = Astro.props;
       </ul>
     </li>
   </ul>
-  <p class="text-text text-lg">
+  <p class="text-lg text-text">
     {plainify(post.body?.slice(0, Number(summary_length)))}
   </p>
-  <a class="mt-3 text-[15px] leading-[22px] py-1 border-b border-primary text-primary inline-block" href={`/posts/${post.slug}`}>Read More</a>
+  <a
+    class="mt-3 inline-block border-b border-primary py-1 text-[15px] leading-[22px] text-primary"
+    href={`/posts/${post.slug}`}>Read More</a
+  >
 </div>

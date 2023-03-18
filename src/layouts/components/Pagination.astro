@@ -22,7 +22,7 @@ for (let i = 1; i <= totalPages; i++) {
               ? `${section ? "/" + section : "/"}`
               : `${section ? "/" + section : ""}/page/${currentPage - 1}`
           }
-          class="rounded px-2 py-2 text-text hover:bg-primary hover:text-body transition-all duration-200"
+          class="rounded px-2 py-2 text-text transition-all duration-200 hover:bg-primary hover:text-body"
         >
           <span class="sr-only">Previous</span>
           <svg
@@ -58,7 +58,7 @@ for (let i = 1; i <= totalPages; i++) {
                 : `${section ? "/" + section : ""}/page/${pagination}`
             }
             aria-current="page"
-            class={`rounded px-4 py-2 text-text hover:bg-primary hover:text-body transition-all duration-200`}
+            class={`rounded px-4 py-2 text-text transition-all duration-200 hover:bg-primary hover:text-body`}
           >
             {pagination}
           </a>
@@ -69,7 +69,7 @@ for (let i = 1; i <= totalPages; i++) {
       {hasNextPage && (
         <a
           href={`${section ? "/" + section : ""}/page/${currentPage + 1}`}
-          class="rounded px-2 py-2 text-text hover:bg-primary hover:text-body transition-all duration-200"
+          class="rounded px-2 py-2 text-text transition-all duration-200 hover:bg-primary hover:text-body"
         >
           <span class="sr-only">Next</span>
           <svg
@@ -86,7 +86,7 @@ for (let i = 1; i <= totalPages; i++) {
             />
           </svg>
         </a>
-      ) }
+      )}
     </nav>
   )
 }

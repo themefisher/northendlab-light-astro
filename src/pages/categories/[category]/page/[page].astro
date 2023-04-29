@@ -4,30 +4,37 @@ import config from "@config/config.json";
 import Base from "@layouts/Base.astro";
 import Pagination from "@layouts/components/Pagination.astro";
 import Post from "@layouts/partials/Post.astro";
-import { getSinglePage } from "@lib/contentParser.astro";
-import { getTaxonomy } from "@lib/taxonomyParser.astro";
 import taxonomyFilter from "@lib/utils/taxonomyFilter";
+import { getSinglePage } from "@lib/contentParser.astro";
+import { sortByDate } from "@lib/utils/sortFunctions";
+import { getTaxonomy } from "@lib/taxonomyParser.astro";
 import { markdownify } from "@lib/utils/textConverter";
 import { getEntryBySlug } from "astro:content";
-const { blog_folder, pagination } = config.settings;
+import type { GetStaticPathsOptions } from "astro";
 
-export async function getStaticPaths() {
-  const { blog_folder } = config.settings;
+export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
+  const { blog_folder, pagination } = config.settings;
+  const allPosts = await getSinglePage(blog_folder);
+  const sortByDatePosts = sortByDate(allPosts);
+
   const categories = await getTaxonomy(blog_folder, "categories");
-
   return categories.map((category) => {
-    return {
-      params: { category },
-    };
+    const filterByTags = taxonomyFilter(
+      sortByDatePosts,
+      "categories",
+      category
+    );
+    return paginate(filterByTags, {
+      params: { category: category || "" },
+      pageSize: pagination,
+    });
   });
-}
+};
 
-const { category } = Astro.params;
 const homepage = await getEntryBySlug("homepage", "index");
 const { banner } = homepage.data;
-const posts = await getSinglePage(blog_folder);
-const filterByTags = taxonomyFilter(posts, "categories", category);
-const totalPages = Math.ceil(filterByTags.length / pagination);
+const { page } = Astro.props;
+const { category } = Astro.params;
 ---
 
 <Base title={category}>
@@ -65,15 +72,11 @@ const totalPages = Math.ceil(filterByTags.length / pagination);
             Posts related to <span class="text-primary">{category}</span> category
           </h1>
           <div class="rounded px-9 py-12 shadow md:p-[60px]">
-            {
-              filterByTags
-                .slice(0, pagination)
-                .map((post) => <Post post={post} />)
-            }
+            {page.data.map((post: any) => <Post post={post} />)}
             <Pagination
               section={`categories/${category}`}
-              currentPage={1}
-              totalPages={totalPages}
+              currentPage={page.currentPage}
+              totalPages={page.lastPage}
             />
           </div>
         </div>

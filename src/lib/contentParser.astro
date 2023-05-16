@@ -3,8 +3,8 @@ import { getCollection } from "astro:content";
 
 export const getSinglePage = async (collection: any) => {
   const allPage = await getCollection(collection);
-  const removeIndex = allPage.filter((data) => data.id !== "_index.md");
-  const removeDrafts = removeIndex.filter(({ data }) => !data.draft);
+  const removeIndex = allPage.filter((data:any) => data.id.match(/^(?!-)/));
+  const removeDrafts = removeIndex.filter(({ data }:any) => !data.draft);
   return removeDrafts;
 };
 ---

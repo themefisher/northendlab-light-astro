@@ -23,7 +23,7 @@
 
 
 ## 🔑Key Features
-- 📄 6+ Pre-designed pages
+- 📄 10+ Pre-designed pages
 - 🎨Highly Customizable (Color, Font, Menu, Social Links, SEO Meta Tags, etc.)
 - ⚡Fast by Default (95+ Google PageSpeed Score)
 - ⚙️ Netlify Settings Pre-configured
@@ -36,13 +36,17 @@
 - 📱 Fully Responsive on Desktops, Tablets, and Smartphones
 - 🔍 SEO Friendly
 
-## 📄 6+ Pre-designed pages
+## 📄 10+ Pre-designed pages
 - 🏠Home Page
 - 👤About
 - 📞Contact
 - 🔒Privacy Policy Page
 - 📝 Blog Pages
 - 📄 Blog Single Pages
+- 👤 Author Page
+- 👤Author Single Page
+- 🗂️ Category Page
+- 📄 Category Single Page
 
 <!-- installation -->
 

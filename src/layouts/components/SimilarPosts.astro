@@ -1,13 +1,14 @@
 ---
-import { Image } from "@astrojs/image/components";
-import dateFormat from "@lib/utils/dateFormat";
-import { humanize, slugify } from "@lib/utils/textConverter";
+import { Image } from "astro:assets";
+import dateFormat from "@/lib/utils/dateFormat";
+import { humanize, slugify } from "@/lib/utils/textConverter";
+import type { Post } from "@/types";
 const { posts } = Astro.props;
 ---
 
 <div class="row justify-center">
   {
-    posts.map((post: any) => (
+    posts.map((post: Post) => (
       <div class={"col-12 mb-4 sm:col-4"}>
         {post.data.image && (
           <Image

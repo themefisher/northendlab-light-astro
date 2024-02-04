@@ -1,10 +1,11 @@
 ---
-import AuthorSingle from "@layouts/AuthorSingle.astro";
-import Base from "@layouts/Base.astro";
-import { getSinglePage } from "@lib/contentParser.astro";
+import AuthorSingle from "@/layouts/AuthorSingle.astro";
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import type { Authors } from "@/types";
 
 export async function getStaticPaths() {
-  const authors = await getSinglePage("authors");
+  const authors: Authors[] = await getSinglePage("authors");
 
   const paths = authors.map((author) => ({
     params: {

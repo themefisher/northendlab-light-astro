@@ -1,7 +1,7 @@
 ---
-import Logo from "@components/Logo.astro";
-import menu from "@config/menu.json";
-import { IoSearch } from "react-icons/io5/index.js";
+import Logo from "@/components/Logo.astro";
+import menu from "@/config/menu.json";
+import { IoSearch } from "react-icons/io5";
 
 export interface ChildNavigationLink {
   name: string;
@@ -110,12 +110,14 @@ const currentPath = new URL(Astro.request.url).pathname;
 </header>
 
 <script>
-  const header = document.querySelector(".header") as HTMLElement;
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 0) {
-      header.classList.add("header-sticky");
-    } else {
-      header.classList.remove("header-sticky");
-    }
+  document.addEventListener("astro:page-load", () => {
+    const header = document.querySelector(".header") as HTMLElement;
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 0) {
+        header.classList.add("header-sticky");
+      } else {
+        header.classList.remove("header-sticky");
+      }
+    });
   });
 </script>

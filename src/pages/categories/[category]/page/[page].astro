@@ -1,20 +1,20 @@
 ---
-import { Image } from "@astrojs/image/components";
-import config from "@config/config.json";
-import Base from "@layouts/Base.astro";
-import Pagination from "@layouts/components/Pagination.astro";
-import Post from "@layouts/partials/Post.astro";
-import taxonomyFilter from "@lib/utils/taxonomyFilter";
-import { getSinglePage } from "@lib/contentParser.astro";
-import { sortByDate } from "@lib/utils/sortFunctions";
-import { getTaxonomy } from "@lib/taxonomyParser.astro";
-import { markdownify } from "@lib/utils/textConverter";
+import config from "@/config/config.json";
+import Base from "@/layouts/Base.astro";
+import Pagination from "@/layouts/components/Pagination.astro";
+import Post from "@/layouts/partials/Post.astro";
+import taxonomyFilter from "@/lib/utils/taxonomyFilter";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import { sortByDate } from "@/lib/utils/sortFunctions";
+import { getTaxonomy } from "@/lib/taxonomyParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
 import { getEntryBySlug } from "astro:content";
 import type { GetStaticPathsOptions } from "astro";
+import { Image } from "astro:assets";
 
 export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
   const { blog_folder, pagination } = config.settings;
-  const allPosts = await getSinglePage(blog_folder);
+  const allPosts = await getSinglePage(blog_folder as any);
   const sortByDatePosts = sortByDate(allPosts);
 
   const categories = await getTaxonomy(blog_folder, "categories");
@@ -28,7 +28,7 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
       params: { category: category || "" },
       pageSize: pagination,
     });
-  });
+  }).flat();
 };
 
 const homepage = await getEntryBySlug("homepage", "index");

@@ -1,8 +1,9 @@
-import config from "@config/config.json";
-import dateFormat from "@lib/utils/dateFormat";
-import { humanize, plainify, slugify } from "@lib/utils/textConverter";
+import React, { useEffect } from "react";
+import config from "@/config/config.json";
+import dateFormat from "@/lib/utils/dateFormat";
+import { humanize, plainify, slugify } from "@/lib/utils/textConverter";
 import Fuse from "fuse.js";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 const { summary_length } = config.settings;
 export type SearchItem = {
   slug: string;
@@ -23,7 +24,7 @@ export default function SearchBar({ searchList }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputVal, setInputVal] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[] | null>(
-    null
+    null,
   );
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -113,7 +114,7 @@ export default function SearchBar({ searchList }: Props) {
                         <a key={index} href="#">
                           {category}
                         </a>
-                      )
+                      ),
                     )}
                   </p>
                 </div>

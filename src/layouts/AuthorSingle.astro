@@ -1,7 +1,7 @@
 ---
-import { Image } from "@astrojs/image/components";
-import { getSinglePage } from "@lib/contentParser.astro";
-import { markdownify } from "@lib/utils/textConverter";
+import { Image } from "astro:assets";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
 import Post from "./partials/Post.astro";
 
 const { author } = Astro.props;
@@ -9,7 +9,7 @@ const { title, image } = author.data;
 const { Content } = await author.render();
 const posts = await getSinglePage("posts");
 const filterByAuthor = posts.filter((post) =>
-  post.data.authors.includes(title)
+  post.data.authors.includes(title),
 );
 ---
 

@@ -5,8 +5,8 @@
 </h2>
 
 <p align=center>
-  <a href="https://github.com/withastro/astro/releases/tag/astro%402.0.11" alt="Contributors">
-    <img src="https://img.shields.io/static/v1?label=ASTRO&message=2.0&color=000&logo=astro" />
+  <a href="https://github.com/withastro/astro/releases/tag/astro%404.3.2" alt="Contributors">
+    <img src="https://img.shields.io/static/v1?label=ASTRO&message=4.3&color=000&logo=astro" />
   </a>
 
   <a href="https://github.com/themefisher/northendlab-light-astro/blob/main/LICENSE">
@@ -20,9 +20,8 @@
 
 ![northendlab-light](https://demo.gethugothemes.com/thumbnails/northendlab-light.png)
 
-
-
 ## 🔑Key Features
+
 - 📄 10+ Pre-designed pages
 - 🎨Highly Customizable (Color, Font, Menu, Social Links, SEO Meta Tags, etc.)
 - ⚡Fast by Default (95+ Google PageSpeed Score)
@@ -37,6 +36,7 @@
 - 🔍 SEO Friendly
 
 ## 📄 10+ Pre-designed pages
+
 - 🏠Home Page
 - 👤About
 - 📞Contact
@@ -95,7 +95,7 @@ If your problem or idea has not been addressed yet, feel free to [open a new iss
 
 ## 📄License
 
-Copyright (c) 2016 - Present, Designed & Developed by [Themefisher](https://themefisher.com)
+Copyright (c) 2023 - Present, Designed & Developed by [Themefisher](https://themefisher.com)
 
 **Code License:** Released under the [MIT](https://github.com/themefisher/northendlab-light-astro/blob/main/LICENSE) license.
 

@@ -1,23 +1,5 @@
 import { defineCollection, z } from "astro:content";
 
-// Homepage schema
-const homepage = defineCollection({
-  schema: z.object({
-    banner: z
-      .object({
-        title: z.string().optional(),
-        image: z.string().optional(),
-      })
-      .optional(),
-    call_to_action: z.object({
-      title: z.string().optional(),
-      content: z.string().optional(),
-      image: z.string().optional(),
-      button_label: z.string().optional(),
-      button_link: z.string().optional(),
-    }),
-  }),
-});
 
 // Post collection schema
 const postsCollection = defineCollection({
@@ -58,21 +40,9 @@ const pagesCollection = defineCollection({
   }),
 });
 
-//contact page schema
-const contact = defineCollection({
-  schema: z.object({
-    title: z.string().optional(),
-    content: z.string().optional(),
-    image: z.string().optional(),
-    draft: z.boolean().optional(),
-  }),
-});
-
 // Export collections
 export const collections = {
-  homepage: homepage,
   posts: postsCollection,
   pages: pagesCollection,
   authors: authorsCollection,
-  contact: contact,
 };

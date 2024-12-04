@@ -66,7 +66,7 @@ const { post } = Astro.props;
       </ul>
     </li>
   </ul>
-  <p class="text-lg text-text">
+  <p class="text-lg text-text break-words">
     {plainify(post.body?.slice(0, Number(summary_length)))}
   </p>
   <a

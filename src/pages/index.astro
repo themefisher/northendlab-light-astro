@@ -8,8 +8,13 @@ import { getSinglePage } from "@/lib/contentParser.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
 import { markdownify } from "@/lib/utils/textConverter";
 import { Image } from "astro:assets";
-import { getEntryBySlug } from "astro:content";
-const homepage = await getEntryBySlug("homepage", "index");
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
+
+const homepage = (await getEntry(
+  "homepage",
+  "-index"
+)) as CollectionEntry<"homepage">;
 const { banner, call_to_action } = homepage.data;
 const posts = await getSinglePage("posts");
 const sortPostByDate = sortByDate(posts);
@@ -35,13 +40,18 @@ const totalPages = Math.ceil(posts.length / settings.pagination);
       <div class="banner-illustration">
         {
           banner?.image && (
-            <Image src={banner?.image} width={768} height={385} alt="" />
+            <Image
+              src={banner.image}
+              width={768}
+              height={385}
+              alt={banner.title}
+            />
           )
         }
       </div>
     </div>
   </section>
-  <!-- ./End Banner -->
+  <!-- /End Banner -->
 
   <!-- Blogs -->
   <div class="section">
@@ -60,6 +70,7 @@ const totalPages = Math.ceil(posts.length / settings.pagination);
       </div>
     </div>
   </div>
-  <!-- ./End Blogs -->
+  <!-- /End Blogs -->
+
   <Cta cta={call_to_action} />
 </Base>

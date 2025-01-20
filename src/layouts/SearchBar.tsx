@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
 import config from "@/config/config.json";
-import dateFormat from "@/lib/utils/dateFormat";
-import { humanize, plainify, slugify } from "@/lib/utils/textConverter";
+import { plainify } from "@/lib/utils/textConverter";
 import Fuse from "fuse.js";
-import { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 const { summary_length } = config.settings;
 export type SearchItem = {
   slug: string;

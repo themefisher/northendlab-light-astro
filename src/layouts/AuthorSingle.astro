@@ -3,13 +3,14 @@ import { Image } from "astro:assets";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import Post from "./partials/Post.astro";
+import { render } from "astro:content";
 
 const { author } = Astro.props;
 const { title, image } = author.data;
-const { Content } = await author.render();
+const { Content } = await render(author);
 const posts = await getSinglePage("posts");
 const filterByAuthor = posts.filter((post) =>
-  post.data.authors.includes(title),
+  post.data.authors.includes(title)
 );
 ---
 

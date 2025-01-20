@@ -3,35 +3,41 @@ import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import Pagination from "@/layouts/components/Pagination.astro";
 import Post from "@/layouts/partials/Post.astro";
-import taxonomyFilter from "@/lib/utils/taxonomyFilter";
 import { getSinglePage } from "@/lib/contentParser.astro";
-import { sortByDate } from "@/lib/utils/sortFunctions";
 import { getTaxonomy } from "@/lib/taxonomyParser.astro";
+import { sortByDate } from "@/lib/utils/sortFunctions";
+import taxonomyFilter from "@/lib/utils/taxonomyFilter";
 import { markdownify } from "@/lib/utils/textConverter";
-import { getEntryBySlug } from "astro:content";
 import type { GetStaticPathsOptions } from "astro";
 import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
 
 export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
-  const { blog_folder, pagination } = config.settings;
-  const allPosts = await getSinglePage(blog_folder as any);
+  const { pagination } = config.settings;
+  const allPosts = await getSinglePage("posts");
   const sortByDatePosts = sortByDate(allPosts);
 
-  const categories = await getTaxonomy(blog_folder, "categories");
-  return categories.map((category) => {
-    const filterByTags = taxonomyFilter(
-      sortByDatePosts,
-      "categories",
-      category
-    );
-    return paginate(filterByTags, {
-      params: { category: category || "" },
-      pageSize: pagination,
-    });
-  }).flat();
+  const categories = await getTaxonomy("posts", "categories");
+  return categories
+    .map((category) => {
+      const filterByTags = taxonomyFilter(
+        sortByDatePosts,
+        "categories",
+        category
+      );
+      return paginate(filterByTags, {
+        params: { category: category || "" },
+        pageSize: pagination,
+      });
+    })
+    .flat();
 };
 
-const homepage = await getEntryBySlug("homepage", "index");
+const homepage = (await getEntry(
+  "homepage",
+  "-index"
+)) as CollectionEntry<"homepage">;
 const { banner } = homepage.data;
 const { page } = Astro.props;
 const { category } = Astro.params;
@@ -62,7 +68,7 @@ const { category } = Astro.params;
       </div>
     </div>
   </section>
-  <!-- ./End Banner -->
+  <!-- /End Banner -->
 
   <div class="section">
     <div class="container">
@@ -72,7 +78,7 @@ const { category } = Astro.params;
             Posts related to <span class="text-primary">{category}</span> category
           </h1>
           <div class="rounded px-9 py-12 shadow md:p-[60px]">
-            {page.data.map((post: any) => <Post post={post} />)}
+            {page.data.map((post) => <Post post={post} />)}
             <Pagination
               section={`categories/${category}`}
               currentPage={page.currentPage}

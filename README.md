@@ -5,8 +5,8 @@
 </h2>
 
 <p align=center>
-  <a href="https://github.com/withastro/astro/releases/tag/astro%404.3.2" alt="Contributors">
-    <img src="https://img.shields.io/static/v1?label=ASTRO&message=4.3&color=000&logo=astro" />
+  <a href="https://github.com/withastro/astro/releases/tag/astro%405.1.7" alt="Contributors">
+    <img src="https://img.shields.io/static/v1?label=ASTRO&message=5.1&color=000&logo=astro" />
   </a>
 
   <a href="https://github.com/themefisher/northendlab-light-astro/blob/main/LICENSE">
@@ -23,8 +23,8 @@
 ## 🔑Key Features
 
 - 📄 10+ Pre-designed pages
-- 🎨Highly Customizable (Color, Font, Menu, Social Links, SEO Meta Tags, etc.)
-- ⚡Fast by Default (95+ Google PageSpeed Score)
+- 🎨 Highly Customizable (Color, Font, Menu, Social Links, SEO Meta Tags, etc.)
+- ⚡ Fast by Default (95+ Google PageSpeed Score)
 - ⚙️ Netlify Settings Pre-configured
 - 📬 Contact Form Support
 - 🌅 Support OG Image
@@ -37,14 +37,14 @@
 
 ## 📄 10+ Pre-designed pages
 
-- 🏠Home Page
-- 👤About
-- 📞Contact
-- 🔒Privacy Policy Page
+- 🏠 Home Page
+- 👤 About
+- 📞 Contact
+- 🔒 Privacy Policy Page
 - 📝 Blog Pages
 - 📄 Blog Single Pages
 - 👤 Author Page
-- 👤Author Single Page
+- 👤 Author Single Page
 - 🗂️ Category Page
 - 📄 Category Single Page
 

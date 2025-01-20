@@ -1,19 +1,23 @@
 ---
-import { Image } from "astro:assets";
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
+import Cta from "@/layouts/components/Cta.astro";
 import Pagination from "@/layouts/components/Pagination.astro";
 import Post from "@/layouts/partials/Post.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
 import { markdownify } from "@/lib/utils/textConverter";
-import { getEntryBySlug } from "astro:content";
-import Cta from "@/layouts/components/Cta.astro";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
 
-const homepage = await getEntryBySlug("homepage", "index");
+const homepage = (await getEntry(
+  "homepage",
+  "-index"
+)) as CollectionEntry<"homepage">;
 
 export async function getStaticPaths() {
-  const posts = await getSinglePage(config.settings.blog_folder as any);
+  const posts = await getSinglePage("posts");
   const totalPages = Math.ceil(posts.length / config.settings.pagination);
   const paths = [];
 
@@ -28,7 +32,7 @@ export async function getStaticPaths() {
 }
 const { banner, call_to_action } = homepage.data;
 const { slug } = Astro.params;
-const posts = await getSinglePage(config.settings.blog_folder as any);
+const posts = await getSinglePage("posts");
 const sortedPosts = sortByDate(posts);
 const totalPages = Math.ceil(posts.length / config.settings.pagination);
 const currentPage = slug && !isNaN(Number(slug)) ? Number(slug) : 1;
@@ -73,7 +77,7 @@ const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
       <div class="row">
         <div class="mx-auto px-0 lg:col-8">
           <div class="rounded-xl p-[60px] shadow">
-            {currentPosts.map((post, i) => <Post post={post} />)}
+            {currentPosts.map((post) => <Post post={post} />)}
             <Pagination totalPages={totalPages} currentPage={currentPage} />
           </div>
         </div>

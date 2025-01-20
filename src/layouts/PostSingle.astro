@@ -3,12 +3,17 @@ import { Image } from "astro:assets";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import dateFormat from "@/lib/utils/dateFormat";
 import { humanize, markdownify, slugify } from "@/lib/utils/textConverter";
-import type { Post, PostData } from "@/types";
+import { render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
-const allAuthors: Post[] = await getSinglePage("authors");
+type Props = {
+  post: CollectionEntry<"posts">;
+};
+
+const allAuthors = await getSinglePage("authors");
 const { post } = Astro.props;
-const { Content } = await post.render();
-const { title, authors, categories, image, date, tags }: PostData = post.data;
+const { Content } = await render(post);
+const { title, authors, categories, image, date } = post.data;
 ---
 
 <section class="section">
@@ -27,11 +32,11 @@ const { title, authors, categories, image, date, tags }: PostData = post.data;
                     .filter((author) =>
                       authors
                         .map((author) => slugify(author))
-                        .includes(slugify(author.data.title)),
+                        .includes(slugify(author.data.title))
                     )
-                    .map((author, i) => (
+                    .map((author) => (
                       <a
-                        href={`/authors/${slugify(author.slug)}`}
+                        href={`/authors/${slugify(author.id)}`}
                         class="flex items-center hover:text-primary hover:underline"
                       >
                         <span>{author.data.title}</span>
@@ -43,7 +48,7 @@ const { title, authors, categories, image, date, tags }: PostData = post.data;
               <li>
                 <ul>
                   {
-                    categories.map((category: string) => (
+                    categories.map((category) => (
                       <li class="inline-block">
                         <a
                           href={`/categories/${slugify(category)}`}
@@ -70,7 +75,6 @@ const { title, authors, categories, image, date, tags }: PostData = post.data;
             }
             <div class="content mb-16 text-left">
               <Content />
-              <!-- <Markdown content={post.body} components={shortcodes} /> -->
             </div>
           </article>
         </div>

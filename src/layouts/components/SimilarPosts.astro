@@ -1,14 +1,19 @@
 ---
-import { Image } from "astro:assets";
 import dateFormat from "@/lib/utils/dateFormat";
 import { humanize, slugify } from "@/lib/utils/textConverter";
-import type { Post } from "@/types";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  posts: CollectionEntry<"posts">[];
+};
+
 const { posts } = Astro.props;
 ---
 
 <div class="row justify-center">
   {
-    posts.map((post: Post) => (
+    posts.map((post) => (
       <div class={"col-12 mb-4 sm:col-4"}>
         {post.data.image && (
           <Image
@@ -37,7 +42,7 @@ const { posts } = Astro.props;
           </li>
         </ul>
         <h3 class="h4">
-          <a href={`/posts/${post.slug}`} class="block hover:text-primary">
+          <a href={`/posts/${post.id}`} class="block hover:text-primary">
             {post.data.title}
           </a>
         </h3>

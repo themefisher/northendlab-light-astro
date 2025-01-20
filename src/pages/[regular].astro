@@ -2,14 +2,13 @@
 import Base from "@/layouts/Base.astro";
 import Default from "@/layouts/Default.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
-import type { Post } from "@/types";
 
 export async function getStaticPaths() {
   const pages = await getSinglePage("pages");
 
-  const paths = pages.map((page: Post) => ({
+  const paths = pages.map((page) => ({
     params: {
-      regular: page.slug,
+      regular: page.id,
     },
     props: { page },
   }));

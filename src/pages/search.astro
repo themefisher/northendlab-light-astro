@@ -1,17 +1,13 @@
 ---
-import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import SearchBar from "@/layouts/SearchBar";
 import { getSinglePage } from "@/lib/contentParser.astro";
 
-const { blog_folder } = config.settings;
-
-// Retrieve all articles
-const posts = await getSinglePage(blog_folder as any);
+const posts = await getSinglePage("posts");
 
 // List of items to search in
-const searchList = posts.map((item:any) => ({
-  slug: item.slug,
+const searchList = posts.map((item) => ({
+  slug: item.id,
   data: item.data,
   content: item.body,
 }));
@@ -24,4 +20,3 @@ const searchList = posts.map((item:any) => ({
     </div>
   </section>
 </Base>
-<!-- @layouts/SearchBar -->

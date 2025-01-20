@@ -1,12 +1,9 @@
 ---
-import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import { getTaxonomy } from "@/lib/taxonomyParser.astro";
 import { humanize } from "@/lib/utils/textConverter";
 
-const { blog_folder } = config.settings;
-
-const categories = await getTaxonomy(blog_folder, "categories");
+const categories = await getTaxonomy("posts", "categories");
 ---
 
 <Base title={"categories"}>

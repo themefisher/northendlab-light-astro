@@ -1,11 +1,15 @@
 ---
-import { Image } from "astro:assets";
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import { markdownify } from "@/lib/utils/textConverter";
-import { getEntryBySlug } from "astro:content";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
 
-const entry = await getEntryBySlug("contact", "index");
+const entry = (await getEntry(
+  "contact",
+  "-index"
+)) as CollectionEntry<"contact">;
 const { contact_form_action } = config.params;
 const { title, image, content } = entry.data;
 ---

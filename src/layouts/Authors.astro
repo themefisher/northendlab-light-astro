@@ -1,12 +1,17 @@
 ---
 import { markdownify } from "@/lib/utils/textConverter";
 import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  authors: CollectionEntry<"authors">[];
+};
 const { authors } = Astro.props;
 ---
 
 <div class="row justify-center">
   {
-    authors.map((author: any) => (
+    authors.map((author) => (
       <div class="col-12 mb-8 sm:col-6 md:col-4">
         {author.data.image && (
           <div class="mb-4">
@@ -20,11 +25,11 @@ const { authors } = Astro.props;
           </div>
         )}
         <h3 class="h4 mb-2">
-          <a href={`/authors/${author.slug}`} class="block hover:text-primary">
+          <a href={`/authors/${author.id}`} class="block hover:text-primary">
             {author.data.title}
           </a>
         </h3>
-        <p set:html={markdownify(author.body.slice(0, 120))} />
+        {author.body && <p set:html={markdownify(author.body.slice(0, 120))} />}
       </div>
     ))
   }

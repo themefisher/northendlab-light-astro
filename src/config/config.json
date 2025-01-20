@@ -12,14 +12,13 @@
   },
 
   "settings": {
-    "blog_folder": "posts",
     "pagination": 5,
     "summary_length": 140
   },
 
   "params": {
     "contact_form_action": "#",
-    "copyright": "© 2023 [Themefisher](https://themefisher.com/) All Rights Reserved"
+    "copyright": "© 2025 [Themefisher](https://themefisher.com/) All Rights Reserved"
   },
 
   "metadata": {

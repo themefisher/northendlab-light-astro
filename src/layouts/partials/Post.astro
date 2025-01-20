@@ -3,13 +3,20 @@ import config from "@/config/config.json";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import dateFormat from "@/lib/utils/dateFormat";
 import { humanize, plainify, slugify } from "@/lib/utils/textConverter";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  post: CollectionEntry<"posts">;
+};
+
 const authors = await getSinglePage("authors");
 const { summary_length } = config.settings;
 const { post } = Astro.props;
 ---
 
 <div class="card mb-12 border-b border-border pb-[30px]">
-  <!-- {
+  {
     post.data.image && (
       <Image
         class="rounded-lg"
@@ -17,13 +24,14 @@ const { post } = Astro.props;
         alt={post.data.title}
         width={445}
         height={230}
+        format="webp"
       />
     )
-  } -->
+  }
 
-  <h3 class="h4">
+  <h3 class="h4 mt-2">
     <a
-      href={`/posts/${post.slug}`}
+      href={`/posts/${post.id}`}
       class="block font-normal text-primary hover:underline"
     >
       {post.data.title}
@@ -35,8 +43,8 @@ const { post } = Astro.props;
         authors
           .filter((author) =>
             post.data.authors
-              .map((author: string) => slugify(author))
-              .includes(slugify(author.data.title)),
+              .map((author) => slugify(author))
+              .includes(slugify(author.data.title))
           )
           .map((author) => (
             <a
@@ -48,11 +56,11 @@ const { post } = Astro.props;
           ))
       }
     </li>
-    <li>{dateFormat(post.data.date)}</li>
+    <li>{dateFormat(post.data.date!)}</li>
     <li>
       <ul>
         {
-          post.data.categories.map((category: string) => (
+          post.data.categories.map((category) => (
             <li class="inline-block">
               <a
                 href={`/categories/${slugify(category)}`}
@@ -66,11 +74,15 @@ const { post } = Astro.props;
       </ul>
     </li>
   </ul>
-  <p class="text-lg text-text">
-    {plainify(post.body?.slice(0, Number(summary_length)))}
-  </p>
+  {
+    post.body && (
+      <p class="text-lg text-text">
+        {plainify(post.body?.slice(0, Number(summary_length)))}
+      </p>
+    )
+  }
   <a
     class="mt-3 inline-block border-b border-primary py-1 text-[15px] leading-[22px] text-primary"
-    href={`/posts/${post.slug}`}>Read More</a
+    href={`/posts/${post.id}`}>Read More</a
   >
 </div>

@@ -6,12 +6,12 @@
         "secondary": "#25b1c8",
         "body": "#fff",
         "border": "#eee",
-        "theme_light": "#f8f8f8"
+        "light": "#f8f8f8"
       },
       "text_color": {
-        "default": "#666",
-        "dark": "#222",
-        "light": "#999"
+        "text": "#666",
+        "text-dark": "#222",
+        "text-light": "#999"
       }
     }
   },
@@ -24,7 +24,7 @@
     },
     "font_size": {
       "base": "16",
-      "scale": "1.250"
+      "scale": "1.2"
     }
   }
 }

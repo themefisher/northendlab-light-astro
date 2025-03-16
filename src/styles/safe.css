@@ -1,0 +1,25 @@
+/* navbar toggler */
+input#nav-toggle:checked ~ label#show-button {
+  @apply hidden;
+}
+
+input#nav-toggle:checked ~ label#hide-button {
+  @apply flex md:hidden;
+}
+
+input#nav-toggle:checked ~ #nav-menu {
+  @apply block md:flex;
+}
+
+/* form style */
+.form-inputs * {
+  @apply mb-5 leading-10;
+}
+
+.form-input {
+  @apply h-[50px] rounded-md border border-border placeholder:text-text focus:border-primary focus:ring-transparent;
+}
+
+.form-textarea {
+  @apply border-border focus:border-primary focus:ring-transparent;
+}

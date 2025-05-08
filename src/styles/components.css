@@ -76,7 +76,7 @@
   @apply prose-code:px-1 prose-code:text-primary;
   @apply prose-pre:rounded-none;
   @apply prose-strong:text-text-dark;
-  @apply prose-a:text-primary prose-a:no-underline hover:prose-a:underline;
+  @apply prose-a:text-primary prose-a:no-underline prose-a:hover:underline;
   @apply prose-table:overflow-hidden prose-table:border prose-table:border-border;
   @apply prose-thead:border-border prose-thead:bg-light prose-th:py-4 prose-th:px-4 prose-th:text-text-dark;
   @apply prose-tr:border-border;

@@ -1,11 +1,10 @@
 ---
-title: "My awesome second blog post"
-image: "/images/post/post-3.jpg"
+title: "5 Ways to Improve Wi-Fi Speed"
+image: "/images/post/post-2.jpg"
 authors: ["Mark Dinn"]
 date: 2025-11-07T05:00:00Z
 description: "This is meta description"
-categories: ["Hugo"]
-type: "post"
+categories: ["News"]
 ---
 
 Are you Developer and recently started your own business and Already made a website to ensure online presence and wants to reach more people. but you are not getting as much as response from your targeted customer or you are unable to reach them. SEO(Search engine optimization)is the cheapest way to reach your customer or client. After 2000 the Internet is more easy access to common people and most of the netizens to find out information search on google/yahoo/bing like a search engine. So if your site ranks at the top of the SERP for your target keywords then sure you will get more valuable traffic to your site and it will help you a lot to grow your business.

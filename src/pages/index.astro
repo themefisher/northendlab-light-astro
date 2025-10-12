@@ -1,9 +1,9 @@
 ---
+import Post from "@/components/Post.astro";
 import { settings } from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import Cta from "@/layouts/components/Cta.astro";
 import Pagination from "@/layouts/components/Pagination.astro";
-import Post from "@/layouts/partials/Post.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
 import { markdownify } from "@/lib/utils/textConverter";
@@ -54,7 +54,7 @@ const totalPages = Math.ceil(posts.length / settings.pagination);
   <!-- /End Banner -->
 
   <!-- Blogs -->
-  <div class="section">
+  <section class="section">
     <div class="container">
       <div class="row px-3">
         <div class="mx-auto px-0 lg:col-8">
@@ -69,7 +69,7 @@ const totalPages = Math.ceil(posts.length / settings.pagination);
         </div>
       </div>
     </div>
-  </div>
+  </section>
   <!-- /End Blogs -->
 
   <Cta cta={call_to_action} />

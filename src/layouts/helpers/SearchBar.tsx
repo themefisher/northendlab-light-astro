@@ -1,8 +1,6 @@
-import config from "@/config/config.json";
 import { plainify } from "@/lib/utils/textConverter";
 import Fuse from "fuse.js";
 import React, { useEffect, useRef, useState } from "react";
-const { summary_length } = config.settings;
 export type SearchItem = {
   slug: string;
   data: any;
@@ -79,7 +77,7 @@ export default function SearchBar({ searchList }: Props) {
       <div className="row">
         <div className="mx-auto px-0 lg:col-8">
           {inputVal.length > 1 && (
-            <h2 className="mt-8 font-normal">
+            <h2 className="mt-8 mb-4 font-normal">
               Found {searchResults?.length}
               {searchResults?.length && searchResults?.length === 1
                 ? " result"
@@ -102,8 +100,8 @@ export default function SearchBar({ searchList }: Props) {
                       {item.data.title}
                     </a>
                   </h3>
-                  <p className="mt-2.5 text-lg text-text">
-                    {plainify(item.content?.slice(0, Number(summary_length)))}
+                  <p className="mt-2.5 text-lg text-text line-clamp-2">
+                    {plainify(item.content)}
                   </p>
                   <p className="mt-3 text-lg">
                     Categories:{" "}

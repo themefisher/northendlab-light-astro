@@ -1,9 +1,9 @@
 html {
-  @apply text-base;
+  @apply text-base overflow-x-hidden;
 }
 
 body {
-  @apply bg-body font-primary font-normal leading-relaxed text-text;
+  @apply bg-body font-primary font-normal leading-relaxed text-text overflow-x-hidden;
 }
 
 h1,

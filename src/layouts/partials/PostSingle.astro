@@ -5,6 +5,7 @@ import dateFormat from "@/lib/utils/dateFormat";
 import { humanize, markdownify, slugify } from "@/lib/utils/textConverter";
 import { render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+import Share from "@/components/Share.astro";
 
 type Props = {
   post: CollectionEntry<"posts">;
@@ -64,19 +65,18 @@ const { title, authors, categories, image, date } = post.data;
             </ul>
             {
               image && (
-                <Image
-                  src={image}
-                  height={500}
-                  width={1000}
-                  alt={title}
-                  class="rounded-lg"
-                />
+                <Image src={image} height={500} width={1000} alt={title} />
               )
             }
             <div class="content mb-16 text-left">
               <Content />
             </div>
           </article>
+
+          <div class="flex items-center">
+            <h5 class="mr-3">Share :</h5>
+            <Share className="social-icons" title={title} slug={post.id} />
+          </div>
         </div>
       </div>
     </div>

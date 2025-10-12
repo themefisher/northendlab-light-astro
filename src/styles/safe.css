@@ -12,12 +12,8 @@ input#nav-toggle:checked ~ #nav-menu {
 }
 
 /* form style */
-.form-inputs * {
-  @apply mb-5 leading-10;
-}
-
 .form-input {
-  @apply h-[50px] rounded-md border border-border placeholder:text-text focus:border-primary focus:ring-transparent;
+  @apply h-[50px] border border-border placeholder:text-text focus:border-primary focus:ring-transparent;
 }
 
 .form-textarea {

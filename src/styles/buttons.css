@@ -3,7 +3,7 @@
 }
 
 .btn-primary {
-  @apply h-[50px] rounded-md bg-primary font-normal capitalize leading-[30px] text-white;
+  @apply bg-primary font-normal capitalize leading-[30px] text-white;
 }
 
 .btn-outline-primary {

@@ -2,8 +2,8 @@
 import { Image } from "astro:assets";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
-import Post from "./partials/Post.astro";
 import { render } from "astro:content";
+import Post from "@/components/Post.astro";
 
 const { author } = Astro.props;
 const { title, image } = author.data;
@@ -18,18 +18,16 @@ const filterByAuthor = posts.filter((post) =>
   <div class="container">
     <div class="row justify-center">
       <div class="lg:col-8">
-        <div class="rounded py-12 px-9 text-center shadow md:p-[60px]">
+        <div class="p-12 text-center shadow">
           {
             image && (
-              <div class="mb-8">
-                <Image
-                  src={image}
-                  class="mx-auto rounded-full"
-                  height={300}
-                  width={300}
-                  alt={title}
-                />
-              </div>
+              <Image
+                src={image}
+                class="mx-auto mb-8"
+                height={300}
+                width={300}
+                alt={title}
+              />
             )
           }
           <h1 set:html={markdownify(title)} class="h2 mb-8" />
@@ -41,7 +39,7 @@ const filterByAuthor = posts.filter((post) =>
     </div>
     <div class="row mt-16 justify-center">
       <div class="lg:col-8">
-        <h2 class="mb-4">Posts by {title}</h2>
+        <h2 class="mb-4">Posts by <span class="text-primary">{title}</span></h2>
         <div class="rounded py-12 px-9 shadow md:p-[60px]">
           {filterByAuthor.map((post) => <Post post={post} />)}
         </div>

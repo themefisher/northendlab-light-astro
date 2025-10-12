@@ -4,8 +4,7 @@ import { markdownify } from "@/lib/utils/textConverter";
 const { cta } = Astro.props;
 ---
 
-<!-- Cta -->
-<section class="cta">
+<section class="section pt-0">
   <div class="container">
     <div class="row px-3">
       <div class="mx-auto lg:col-8">
@@ -19,8 +18,8 @@ const { cta } = Astro.props;
               alt=""
             />
           </div>
-          <div class="mt-6 text-center md:col-8 md:mt-0 md:text-start">
-            <h3 class="h4 lg:text-[30px]" set:html={markdownify(cta?.title)} />
+          <div class="max-md:mt-6 text-center md:col-8 md:text-start">
+            <h3 class="h4" set:html={markdownify(cta?.title)} />
             <p class="mt-2 text-lg" set:html={markdownify(cta?.content)} />
             <a class="btn btn-primary mt-4" href={cta.button_link}
               >{cta.button_label}</a
@@ -31,4 +30,3 @@ const { cta } = Astro.props;
     </div>
   </div>
 </section>
-<!-- /End Cta -->

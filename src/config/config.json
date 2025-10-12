@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Northendlab | Astro Blog Theme",
-    "base_url": "https://example.com",
+    "base_url": "https://northendlab-light-astro.vercel.app/",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",
@@ -12,13 +12,17 @@
   },
 
   "settings": {
-    "pagination": 5,
-    "summary_length": 140
+    "pagination": 5
   },
 
   "params": {
     "contact_form_action": "#",
     "copyright": "© 2025 [Themefisher](https://themefisher.com/) All Rights Reserved"
+  },
+
+  "google_tag_manager": {
+    "enable": false,
+    "gtm_id": "GTM-XXXXXX"
   },
 
   "metadata": {

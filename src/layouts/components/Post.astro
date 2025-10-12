@@ -1,5 +1,4 @@
 ---
-import config from "@/config/config.json";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import dateFormat from "@/lib/utils/dateFormat";
 import { humanize, plainify, slugify } from "@/lib/utils/textConverter";
@@ -11,25 +10,24 @@ type Props = {
 };
 
 const authors = await getSinglePage("authors");
-const { summary_length } = config.settings;
 const { post } = Astro.props;
 ---
 
-<div class="card mb-12 border-b border-border pb-[30px]">
+<div class="card mb-12 border-b border-border pb-8">
   {
     post.data.image && (
       <Image
-        class="rounded-lg"
         src={post.data.image}
         alt={post.data.title}
         width={445}
         height={230}
         format="webp"
+        class="rounded"
       />
     )
   }
 
-  <h3 class="h4 mt-2">
+  <h3 class="h4 mt-4">
     <a
       href={`/posts/${post.id}`}
       class="block font-normal text-primary hover:underline"
@@ -76,9 +74,7 @@ const { post } = Astro.props;
   </ul>
   {
     post.body && (
-      <p class="text-lg text-text">
-        {plainify(post.body?.slice(0, Number(summary_length)))}
-      </p>
+      <p class="text-lg text-text line-clamp-2">{plainify(post.body)}</p>
     )
   }
   <a

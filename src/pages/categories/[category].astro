@@ -1,8 +1,8 @@
 ---
+import Post from "@/components/Post.astro";
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import Pagination from "@/layouts/components/Pagination.astro";
-import Post from "@/layouts/partials/Post.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { getTaxonomy } from "@/lib/taxonomyParser.astro";
 import taxonomyFilter from "@/lib/utils/taxonomyFilter";
@@ -33,7 +33,7 @@ const filterByTags = taxonomyFilter(posts, "categories", category);
 const totalPages = Math.ceil(filterByTags.length / pagination);
 ---
 
-<Base title={category as any}>
+<Base title={category}>
   <!-- Banner -->
   <section
     class="banner"
@@ -74,7 +74,7 @@ const totalPages = Math.ceil(filterByTags.length / pagination);
                 .map((post) => <Post post={post} />)
             }
             <Pagination
-              section={`categories/${category}`}
+              section={`/categories/${category}`}
               currentPage={1}
               totalPages={totalPages}
             />
